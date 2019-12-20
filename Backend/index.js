@@ -28,3 +28,4 @@ db.connectDb().then(() => {
 });
 
 
+module.exports = app;
