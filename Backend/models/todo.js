@@ -1,17 +1,13 @@
-mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 const todoSchema = new mongoose.Schema({
-    todos: {
-
-        title: String,
-        description: String,
-        date: Number,
-
-    }
+    title: String,
+    description: String,
+    date: Number
 });
 
 
 
-const todo = mongoose.model('todo', todoSchema);
+const Todos = mongoose.model('Todos', todoSchema);
 
-module.exports = todo;
+module.exports = Todos;

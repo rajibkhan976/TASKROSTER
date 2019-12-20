@@ -1,53 +1,39 @@
 
-get = (req, res, next) => {
-    console.log(req.query.name);
-
+getTodos = (req, res, next) => {
     var query;
-    if (req.query.name) {
-        query = req.models.student.findOne({ 'students.name': req.query.name });
+    if (req.query.title) {
+        query = req.models.Todos.findOne({ title: req.query.title });
     } else {
-        query = req.models.student.find();
+        query = req.models.Todos.find();
     }
 
-    query
-        .exec()
-        .then(student => {
-            return res.send(student);
-        })
-        .catch(error => next(error));
-};
-
-post = (req, res, next) => {
-    req.models.todo.create({
-        todos: {
-            title: req.body.todos.title,
-            description: req.body.todos.description,
-            date: req.body.todos.date
-        }
-    })
-        .then(student => {
-            return res.status(201).send(student);
-        })
-        .catch(error => {
-            next(error);
-        });
+    query.exec().then(todo => {
+        return res.send(todo);
+    }).catch(error => next(error));
 };
 
 getById = (req, res, next) => {
-    req.models.student.findById(req.params.id)
-        .then(student => {
-            return res.send(student);
-        })
-        .catch(error => next(error));
+    req.models.Todos.findById(req.params.id).then(todo => {
+        return res.send(todo);
+    }).catch(error => next(error));
+};
+
+post = (req, res, next) => {
+    req.models.Todos.create({
+        title: req.body.title,
+        description: req.body.description,
+        date: req.body.date
+    }).then(todo => {
+        return res.status(201).send(todo);
+    }).catch(error => {
+        next(error);
+    });
 };
 
 module.exports = {
-    get,
+    getTodos,
     post,
-    getById,
-    deleteById,
-    put,
-    patch
+    getById
 };
 
 
