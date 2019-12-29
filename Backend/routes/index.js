@@ -10,7 +10,9 @@ router.use(function timelog (req, res, next) {
 */
 
 router.get('/todos', todo.getTodos);
-router.post('/todos', todo.post);
-router.get("/todos/:id", todo.getById);
+router.post('/todos', todo.addTask);
+router.get('/todos/:id', todo.getTaskById);
+router.patch('/todos/:id', todo.updateTaskById);
+router.delete('/todos/:id', todo.deleteTaskById);
 
 module.exports = router;
