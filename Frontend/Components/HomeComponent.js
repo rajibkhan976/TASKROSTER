@@ -23,6 +23,9 @@ export default class HomeComponent extends Component {
         .then((data) => {
             this.setState({
                 todos: data,
+                title: data.title,
+                description: data.description,
+                date: data.date
             });
         })
         .catch((error) =>{
