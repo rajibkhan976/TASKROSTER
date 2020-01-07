@@ -15,25 +15,6 @@ export default class TaskManagerComponent extends Component {
 		};
 	}
 	
-	getTaskById = (taskId, e) => {
-		fetch("http://localhost:3000/todos/" + taskId)
-		.then((response) => {
-			return response.json();
-		})
-		.then((data) => {
-			this.setState({
-				title: data.title,
-				description: data.description,
-				date: data.date
-			});
-		})
-		.catch((error) => {
-			this.setState({
-				error: error
-			})
-		})
-	}
-	
 	updateTaskById = (taskId, e) => {
 		if (
 		this.state.title !== undefined &&
