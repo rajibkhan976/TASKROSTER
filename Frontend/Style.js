@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+  //Home Styles
   logo: {
     width: '50%',
     height: 100,
@@ -23,6 +24,28 @@ export default StyleSheet.create({
       fontSize: 20,
       lineHeight: 25
   },
+  flatList: {
+    marginTop: 10,
+    width: '100%'
+  },
+  eachTask: {
+    margin: 10,
+    padding: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 6.22,
+    elevation: 3,
+  },
+  title: {
+    fontWeight: 600,
+    textTransform: 'uppercase'
+  },
+
+  //General
   bigBlue: {
     color: 'blue',
     fontWeight: 'bold',
@@ -31,22 +54,24 @@ export default StyleSheet.create({
   red: {
     color: 'red',
   },
+  
+  //TaskManager
   message: {
     fontSize: 20,
     textAlign: 'center'
-},
-container: {
-    padding: 50
-},
-form: {
-    width: '80%',
-    padding: 50,
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-    textAlign: 'center'
-},
-button: {
-    textAlign: 'center',
-    fontSize: 40
-}
+  },
+  container: {
+      padding: 50
+  },
+  form: {
+      width: '80%',
+      padding: 50,
+      borderBottomColor: 'black',
+      borderBottomWidth: 1,
+      textAlign: 'center'
+  },
+  button: {
+      textAlign: 'center',
+      fontSize: 40
+  }
 });

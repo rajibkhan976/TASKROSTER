@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Text, View, FlatList } from 'react-native';
+import { Image, Text, View, FlatList, Item } from 'react-native';
 import styles from '../Style';
 
 export default class HomeComponent extends Component {
@@ -8,12 +8,7 @@ export default class HomeComponent extends Component {
 		super(props);
 		
 		this.state = {
-            todos: [],
-			title: '',
-			description: '',
-			date: undefined,
-            //error: '',
-            //dataSource: '',
+            todos: []
 		};
     }
     
@@ -25,38 +20,14 @@ export default class HomeComponent extends Component {
         .then((data) => {
             this.setState({
                 todos: data,
-                title: data.title,
-                description: data.description,
-                date: data.date
             });
         })
         .catch((error) =>{
             console.error(error);
         });
-        
     }
 	
-	getTaskById = (taskId, e) => {
-		fetch("http://localhost:3000/todos/" + taskId)
-		.then((response) => {
-			return response.json();
-		})
-		.then((data) => {
-			this.setState({
-				title: data.title,
-				description: data.description,
-				date: data.date
-			});
-		})
-		.catch((error) => {
-			this.setState({
-				error: error
-			})
-		})
-	}
-	
   render() {
-    console.log('data', this.state.todos)
 	return (
 	  <View>
         <View style={styles.logoView}>
@@ -66,8 +37,14 @@ export default class HomeComponent extends Component {
 		    <Text style={styles.infoText}>Welcome!</Text>
             <Text style={styles.infoText}>These are your upcoming tasks:</Text>
             <FlatList
+                style={styles.flatList}
                 data={this.state.todos}
-                renderItem={({item}) => <Text>{item._id}</Text>}
+                renderItem={({item}) => 
+                    <Text style={styles.eachTask}>
+                        <Text style={styles.title}>{item.title}</Text>{"\n"}
+                        <Text>{item.description}</Text>{"\n"} 
+                        <Text>{item.date}</Text> 
+                    </Text>}
                 keyExtractor={item => item._id}
             />
         </View>
