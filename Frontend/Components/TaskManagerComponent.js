@@ -34,6 +34,40 @@ export default class TaskManagerComponent extends Component {
 		})
 	}
 	
+	updateTaskById = (taskId, e) => {
+		if (
+		this.state.title !== undefined &&
+		this.state.description !== undefined &&
+		this.state.date !== undefined
+		) {
+			fetch("http://localhost:3000/todos" + taskId, {
+				method: 'PATCH',
+				mode: 'cors',
+				headers: {
+				'Access-Control-Allow-Origin': 'http://localhost:3000/',
+				'Access-Control-Allow-Credentials': 'true',
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					title: this.state.title,
+					description: this.state.description,
+					date: this.state.date
+				})
+			})
+			.then((response) => {
+				alert('Task updated successfully:)')
+			})
+			.catch((error) => {
+				this.setState({
+					error: error
+				});
+			})
+		} else {
+			alert('Please enter the information correctly!');
+		}
+	}
+	
   render() {
 	return (
 	  <View style={styles.container}>
