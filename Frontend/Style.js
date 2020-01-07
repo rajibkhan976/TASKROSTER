@@ -31,4 +31,22 @@ export default StyleSheet.create({
   red: {
     color: 'red',
   },
+  message: {
+    fontSize: 20,
+    textAlign: 'center'
+},
+container: {
+    padding: 50
+},
+form: {
+    width: '80%',
+    padding: 50,
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+    textAlign: 'center'
+},
+button: {
+    textAlign: 'center',
+    fontSize: 40
+}
 });
