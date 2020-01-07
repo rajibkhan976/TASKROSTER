@@ -8,7 +8,10 @@ export default class HomeComponent extends Component {
 		super(props);
 		
 		this.state = {
-            todos: []
+            todos: [],
+            title: '',
+			description: '',
+			date: undefined,
 		};
     }
     
@@ -26,7 +29,27 @@ export default class HomeComponent extends Component {
             console.error(error);
         });
     }
-	
+    
+    
+    getTaskById = (taskId, e) => {
+		fetch("http://localhost:3000/todos/" + taskId)
+		.then((response) => {
+			return response.json();
+		})
+		.then((data) => {
+			this.setState({
+				title: data.title,
+				description: data.description,
+				date: data.date
+			});
+		})
+		.catch((error) => {
+			this.setState({
+				error: error
+			})
+		})
+    }
+    
   render() {
 	return (
 	  <View>
