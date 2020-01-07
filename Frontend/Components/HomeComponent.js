@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, View, FlatList } from 'react-native';
-import { List, ListItem } from 'react-native-elements';
-//import styles from '../Style';
+import styles from '../Style';
 
 export default class HomeComponent extends Component {
 	
@@ -61,28 +60,3 @@ export default class HomeComponent extends Component {
 	);
   }
 }
-
-const styles = StyleSheet.create({
-    logo: {
-        width: '50%',
-        height: 100,
-        marginTop: 10,
-    },
-    logoView: {
-        borderBottomWidth: 1,
-        borderColor: 'lightgray',
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    infoContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20,
-        height: '100%'
-    },
-    infoText: {
-        fontSize: 20,
-        lineHeight: 25
-    }
-});
