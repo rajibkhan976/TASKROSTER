@@ -92,9 +92,10 @@ export default class TaskManagerComponent extends Component {
     }
 
     render() {
-        console.log(this.state.title)
-        console.log(this.state.date)
-        console.log(this.state.description)
+        console.log(this.state.title);
+        console.log(this.state.date);
+        console.log(this.state.description);
+		console.log(this.props.task);
         return (
             <View style={styles.container}>
                 <Text style={styles.message}>Add your task!</Text>

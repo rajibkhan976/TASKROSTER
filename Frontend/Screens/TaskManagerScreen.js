@@ -8,7 +8,7 @@ export default class TaskManagerScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TaskManagerComponent/>
+        <TaskManagerComponent task={this.props.task}/>
       </View>
     );
   }
