@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Image, Text, View, FlatList } from 'react-native';
+import moment from 'moment';
+import { Icon } from 'react-native-elements';
 import styles from '../Style';
 
 export default class HomeComponent extends Component {
@@ -9,11 +11,9 @@ export default class HomeComponent extends Component {
 		
 		this.state = {
             todos: [],
-			title: '',
+            title: '',
 			description: '',
 			date: undefined,
-            //error: '',
-            //dataSource: '',
 		};
     }
     
@@ -33,10 +33,10 @@ export default class HomeComponent extends Component {
         .catch((error) =>{
             console.error(error);
         });
-        
     }
-	
-	getTaskById = (taskId, e) => {
+    
+    
+    getTaskById = (taskId, e) => {
 		fetch("http://localhost:3000/todos/" + taskId)
 		.then((response) => {
 			return response.json();
@@ -53,25 +53,34 @@ export default class HomeComponent extends Component {
 				error: error
 			})
 		})
-	}
-	
+    }
+    
   render() {
-    console.log('data', this.state.todos)
 	return (
-	  <View>
-        <View style={styles.logoView}>
-            <Image style={styles.logo} source={require('./large_taskroster.png')} />
-        </View>
-        <View style={styles.infoContainer}>
-		    <Text style={styles.infoText}>Welcome!</Text>
-            <Text style={styles.infoText}>These are your upcoming tasks:</Text>
-            <FlatList
-                data={this.state.todos}
-                renderItem={({item}) => <Text>{item._id}</Text>}
-                keyExtractor={item => item._id}
-            />
-        </View>
-	  </View>
+        <View>
+            <View style={styles.logoView}>
+                <Image style={styles.logo} source={require('./large_taskroster.png')} />
+            </View>
+            <View style={styles.infoContainer}>
+                <Text style={styles.infoText}>Welcome!</Text>
+                <Text style={styles.infoText}>These are your upcoming tasks:</Text>
+                <FlatList
+                    style={styles.flatList}
+                    data={this.state.todos}
+                    keyExtractor={item => item._id}
+                    renderItem={({item}) => 
+                    <Text style={styles.eachTask}>
+                        <Text style={styles.title}>{item.title}</Text>{"\n"}
+                        <Text>{item.description}</Text>{"\n"} 
+                        <Text>{moment(item.date).format('YYYY-MM-DD, hh:mm a')}</Text>
+                        <View style={styles.iconView}>
+                            <Icon iconStyle={styles.iconEdit} name="edit" type="font-awesome" onPress={() => console.log('it`s been pressed')}/>
+                            <Icon iconStyle={styles.iconDelete} name="trash" type="font-awesome" onPress={() => console.log('it`s been deleted')}/> 
+                        </View>
+                    </Text>}
+                />
+            </View>
+	    </View>
 	);
   }
 }
