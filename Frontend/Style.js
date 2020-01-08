@@ -40,19 +40,18 @@ export default StyleSheet.create({
     shadowRadius: 6.22,
     elevation: 3,
   },
-  title: {
-    fontWeight: 600,
-    textTransform: 'uppercase'
+  iconView: {
+    position: 'absolute',
+    top: "20px",
+    right: "20px",
+    display: "block"
   },
-
-  //General
-  bigBlue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
+  iconDelete: {
+    marginLeft: "10px",
+    fontSize: "20px"
   },
-  red: {
-    color: 'red',
+  iconEdit: {
+    fontSize: "20px"
   },
   
   //TaskManager
