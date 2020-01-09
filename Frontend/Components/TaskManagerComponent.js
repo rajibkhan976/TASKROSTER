@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import styles from '../Style';
- import DateTimePicker from '@react-native-community/datetimepicker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 export default class TaskManagerComponent extends Component {
@@ -12,13 +12,24 @@ export default class TaskManagerComponent extends Component {
         this.state = {
             title: '',
             description: '',
-            date: new Date('2020-06-12T14:42:42'),
+            date: '',
             error: '',
             mode: 'date',
             show: false,
+            message: ''
 
         };
     }
+    componentDidMount() {
+        var today = new Date();
+        var date = today.getFullYear() + '-' + ('0' + today.getMonth() + 1).slice(-2) + '-' + ('0' + today.getDate()).slice(-2);
+        var time = (today.getHours()-1) + ":" + ('0' + today.getMinutes()).slice(-2) + ":" + ('0' + today.getSeconds()).slice(-2)
+        var dateTime = date + 'T' + time;
+        parseInt(dateTime)
+          this.setState({
+              date: new Date(dateTime)
+          })
+        }
 
     updateTaskById = (taskId, e) => {
         if (
@@ -54,11 +65,13 @@ export default class TaskManagerComponent extends Component {
         }
     }
 
- 
+
     postTask = () => {
-       
+        if (
+            this.state.title !== '' && this.state.description !== ''
+        ) {
             fetch("http://10.80.103.210:3000/todos", {
-            
+
                 method: 'POST',
                 body: JSON.stringify({
                     title: this.state.title,
@@ -71,69 +84,75 @@ export default class TaskManagerComponent extends Component {
             }).then(res => res.json())
                 .then(response => console.log('Success:', JSON.stringify(response)))
                 .catch(error => console.error('Error:', error));
-        } 
-    
+            this.setState({
+                message: 'Task Added!'
+            })
+        } else {
+            alert('Please enter the information correctly!')
+            this.setState({
+                message: 'Task not Added!'
+            })
+        }
+    }
+
 
     setDate = (event, date) => {
         date = date || this.state.date;
-    
+
         this.setState({
-          show: Platform.OS === 'ios' ? true : false,
-          date,
+            show: Platform.OS === 'ios' ? true : false,
+            date,
         });
-      }
-    
-      show = mode => {
+    }
+
+    show = mode => {
         this.setState({
-          show: true,
-          mode,
+            show: true,
+            mode,
         });
-      }
-    
-      datepicker = () => {
+    }
+
+    datepicker = () => {
         this.show('date');
-      }
-    
-      timepicker = () => {
+    }
+
+    timepicker = () => {
         this.show('time');
-      }
+    }
 
     render() {
         console.log(this.state.title)
         console.log(this.state.description)
         console.log(this.state.date)
-        const { show, date, mode, title, description } = this.state;
+        const { show, date, mode, title, description, message } = this.state;
         return (
             <View style={styles.container}>
                 <Text style={styles.message}>Add your task!</Text>
                 <TextInput placeholder='Title'
                     style={styles.form}
-                    value={this.state.title}
-                    onChangeText={(title) => this.setState({title})} />
+                    value={title}
+                    onChangeText={(title) => this.setState({ title })} />
                 <TextInput placeholder='Description'
                     style={styles.form}
-                    value={this.state.description}
-                    onChangeText={(description) => this.setState({description})} />
-                    {/* <TextInput placeholder='Description'
-                    style={styles.form}
-                    value={this.state.date}
-                    onChange={this.} /> */}
-
-                 <View>
-          <Button onPress={this.datepicker} title="Add date" />
-        </View>
-        <View>
-          <Button onPress={this.timepicker} title="Add time!" />
-        </View>
-        { show && <DateTimePicker value={date}
+                    value={description}
+                    onChangeText={(description) => this.setState({ description })} />
+                <View>
+                    <Button onPress={this.datepicker} title="Add date" />
+                </View>
+                <View>
+                    <Button onPress={this.timepicker} title="Add time!" />
+                </View>
+                {show && <DateTimePicker value={date}
                     mode={mode}
                     is24Hour={true}
                     display="default"
                     onChange={this.setDate} />
-        } 
-        <Button title='Add task'
+                }
+                <Button title='Add task'
                     style={styles.button}
                     onPress={this.postTask} />
+                <Text style={styles.message}>{message}</Text>
+
             </View>
         );
     }
