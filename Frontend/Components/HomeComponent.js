@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Image, Text, View, FlatList } from 'react-native';
 import moment from 'moment';
 import { Icon } from 'react-native-elements';
+import { Ionicons } from '@expo/vector-icons';
 import styles from '../Style';
 import TaskManagerScreen from '../Screens/TaskManagerScreen';
 
@@ -94,7 +95,7 @@ export default class HomeComponent extends Component {
 			{this.state.showTodos ? 
 			<View style={styles.infoContainer}>
                 <Text style={styles.infoText}>Welcome!</Text>
-                <Text style={styles.infoText}>These are your upcoming tasks:</Text>
+                <Text style={styles.addButton} onPress={this.hello}> Add Task <Ionicons name="md-add-circle-outline" size={20}/></Text>
                 <FlatList
                     style={styles.flatList}
                     data={this.state.todos}
