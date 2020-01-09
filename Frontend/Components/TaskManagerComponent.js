@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import styles from '../Style';
-
-// import DateTimePicker from '@react-native-community/datetimepicker';
+//import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 export default class TaskManagerComponent extends Component {
@@ -14,114 +13,148 @@ export default class TaskManagerComponent extends Component {
             title: '',
             description: '',
             date: new Date('2020-06-12T14:42:42'),
-            error: ''
-            
+            error: '',
+            mode: 'date',
+            show: false,
+
         };
     }
-
-    updateTaskById = (taskId, e) => {
-		if (
-		this.state.title !== undefined &&
-		this.state.description !== undefined &&
-		this.state.date !== undefined
-		) {
-			fetch("http://localhost:3000/todos" + taskId, {
-				method: 'PATCH',
-				mode: 'cors',
-				headers: {
-				'Access-Control-Allow-Origin': 'http://localhost:3000/',
-				'Access-Control-Allow-Credentials': 'true',
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					title: this.state.title,
-					description: this.state.description,
-					date: this.state.date
-				})
-			})
-			.then((response) => {
-				alert('Task updated successfully:)')
-			})
-			.catch((error) => {
-				this.setState({
-					error: error
-				});
-			})
-		} else {
-			alert('Please enter the information correctly!');
+	
+	componentDidMount() {
+		if (this.props.task !== undefined) {
+			this.setState({
+				title: this.props.task.title,
+				description: this.props.task.description,
+				date: this.props.task.date
+			});
 		}
 	}
 
-    handleTitle = event => {
-        this.setState({
-            title: event.target.value
-        })
-
+    updateTaskById = (taskId, e) => {
+        if (
+            this.state.title !== undefined &&
+            this.state.description !== undefined &&
+            this.state.date !== undefined
+        ) {
+            fetch("http://localhost:3000/todos/" + taskId, {
+                method: 'PATCH',
+                mode: 'cors',
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://localhost:3000/',
+                    'Access-Control-Allow-Credentials': 'true',
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: this.state.title,
+                    description: this.state.description,
+                    date: this.state.date
+                })
+            })
+                .then((response) => {
+                    alert('Task updated successfully:)')
+                })
+                .catch((error) => {
+                    this.setState({
+                        error: error
+                    });
+                })
+        } else {
+            alert('Please enter the information correctly!');
+        }
     }
 
-    handleDescription = event => {
-        this.setState({
-            description: event.target.value
-        })
-    }
-
-
-
+ 
     postTask = () => {
-         fetch("http://localhost:3000/todos", {
-       method: 'POST',
-       body: JSON.stringify({
-           title: this.state.title,
-           description: this.state.description,
-           date: this.state.date
-       }),
-       headers: {
-         'Content-Type': 'application/json'
-       }
-     }).then(res => res.json())
-       .then(response => console.log('Success:', JSON.stringify(response)))
-       .catch(error => console.error('Error:', error));
-    }
+       
+            fetch("http://10.80.103.210:3000/todos", {
+            
+                method: 'POST',
+                body: JSON.stringify({
+                    title: this.state.title,
+                    description: this.state.description,
+                    date: this.state.date
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(res => res.json())
+                .then(response => console.log('Success:', JSON.stringify(response)))
+                .catch(error => console.error('Error:', error));
+        } 
+    
 
-    dateChange = event => {
+    setDate = (event, date) => {
+        date = date || this.state.date;
+    
         this.setState({
-            date: event.target.value
-        })
-
-    }
+          show: Platform.OS === 'ios' ? true : false,
+          date,
+        });
+      }
+    
+      show = mode => {
+        this.setState({
+          show: true,
+          mode,
+        });
+      }
+    
+      datepicker = () => {
+        this.show('date');
+      }
+    
+      timepicker = () => {
+        this.show('time');
+      }
 
     render() {
-        console.log(this.state.title);
-        console.log(this.state.date);
-        console.log(this.state.description);
-		console.log(this.props.task);
+        console.log(this.state.title)
+        console.log(this.state.description)
+        console.log(this.state.date)
+        const { show, date, mode, title, description } = this.state;
         return (
             <View style={styles.container}>
                 <Text style={styles.message}>Add your task!</Text>
                 <TextInput placeholder='Title'
                     style={styles.form}
                     value={this.state.title}
-                    onChange={this.handleTitle} />
+                    onChangeText={(title) => this.setState({title})} />
                 <TextInput placeholder='Description'
                     style={styles.form}
                     value={this.state.description}
-                    onChange={this.handleDescription} />
-                <TextInput placeholder='Date'
+                    onChangeText={(description) => this.setState({description})} />
+				<TextInput placeholder='Date'
                     style={styles.form}
                     value={this.state.date}
-                    onChange={this.dateChange} />
-                <Button title='ADD'
+                    onChangeText={(date) => this.setState({date})} /> 
+                 <View>
+          <Button onPress={this.datepicker} title="Add date" />
+        </View>
+        <View>
+          <Button onPress={this.timepicker} title="Add time!" />
+        </View>
+        {/* show && <DateTimePicker value={date}
+                    mode={mode}
+                    is24Hour={true}
+                    display="default"
+                    onChange={this.setDate} />
+        */} 
+		{this.props.task ?
+		<Button title='Update task'
                     style={styles.button}
-                    onPress={this.postTask} />
-                    {/* <DateTimePicker value={this.state.date}
-                    display='calendar'/>         */}
-            </View>
+                    onPress={(e) => this.updateTaskById(this.props.task._id, e)} />
+		:
+		<Button title='Add task'
+                    style={styles.button}
+                    onPress={() => this.postTask()} />
+		}
+        </View>
         );
     }
 }
-	
+
 
 const style = StyleSheet.create({
-   
+
 });
