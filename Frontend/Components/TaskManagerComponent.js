@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import styles from '../Style';
+import { Icon } from 'react-native-elements';
 //import DateTimePicker from '@react-native-community/datetimepicker';
 
 
@@ -52,23 +53,29 @@ export default class TaskManagerComponent extends Component {
                 })
             })
                 .then((response) => {
-                    alert('Task updated successfully:)')
+                    alert('Task updated successfully:)');
+					this.props.navigateToToDoList();
+					this.props.getToDoList();
                 })
                 .catch((error) => {
                     this.setState({
                         error: error
                     });
+					this.props.navigateToToDoList();
+					this.props.getToDoList();
                 })
         } else {
             alert('Please enter the information correctly!');
+			this.props.navigateToToDoList();
+			this.props.getToDoList();
         }
     }
 
  
     postTask = () => {
-       
-            fetch("http://10.80.103.210:3000/todos", {
-            
+       //http://localhost:3000/todos
+	   //http://10.80.103.210:3000/todos
+            fetch("http://localhost:3000/todos", {
                 method: 'POST',
                 body: JSON.stringify({
                     title: this.state.title,
@@ -79,8 +86,18 @@ export default class TaskManagerComponent extends Component {
                     'Content-Type': 'application/json'
                 }
             }).then(res => res.json())
-                .then(response => console.log('Success:', JSON.stringify(response)))
-                .catch(error => console.error('Error:', error));
+                .then((response) => {
+					console.log('Success:', JSON.stringify(response));
+					this.props.navigateToToDoList();
+					this.props.getToDoList();
+				})
+                .catch((error) => {
+					this.setState({
+                        error: error
+                    });
+					this.props.navigateToToDoList();
+					this.props.getToDoList();
+				})
         } 
     
 
@@ -115,6 +132,9 @@ export default class TaskManagerComponent extends Component {
         const { show, date, mode, title, description } = this.state;
         return (
             <View style={styles.container}>
+				<View>
+					<Icon iconStyle={styles.iconArrowLeft} name="arrow-left" type="font-awesome" onPress={() => this.props.navigateToToDoList()}/>
+				</View>
                 <Text style={styles.message}>Add your task!</Text>
                 <TextInput placeholder='Title'
                     style={styles.form}
