@@ -41,7 +41,7 @@ export default StyleSheet.create({
     elevation: 3,
   },
   iconView: {
-    position: 'absolute',
+    position: "absolute",
     top: "20px",
     right: "20px",
     display: "block"
@@ -52,6 +52,26 @@ export default StyleSheet.create({
   },
   iconEdit: {
     fontSize: "20px"
+  },
+  iconRemoveMessage: {
+	  margin: 15
+  },
+  iconCheck: {
+	  position: "absolute",
+	  top: "5px",
+	  left: "100px",
+	  fontSize: "20px"
+  },
+  iconTimes: {
+	  position: "absolute",
+	  top: "5px",
+	  left: "160px",
+	  fontSize: "20px"
+  },
+  iconArrowLeft: {
+	  position: "absolute",
+	  top: "-50px",
+	  left: "-60px",
   },
   
   //TaskManager

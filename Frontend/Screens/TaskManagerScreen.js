@@ -8,7 +8,11 @@ export default class TaskManagerScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TaskManagerComponent/>
+        <TaskManagerComponent 
+		task={this.props.task} 
+		navigateToToDoList={this.props.navigateToToDoList}
+		getToDoList={this.props.getToDoList}
+		/>
       </View>
     );
   }
