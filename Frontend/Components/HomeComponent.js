@@ -54,7 +54,6 @@ export default class HomeComponent extends Component {
 			return response.json();
 		})
 		.then((data) => {
-			console.log(data);
 			this.setState({
 				showTodos: false,
 				showTaskManager: false,
