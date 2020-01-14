@@ -17,7 +17,6 @@ export default class TaskManagerComponent extends Component {
             mode: 'date',
             show: false,
             message: ''
-
         };
     }
 	
@@ -61,9 +60,11 @@ export default class TaskManagerComponent extends Component {
                 })
             })
                 .then((response) => {
-                    alert('Task updated successfully:)');
-					this.props.navigateToToDoList();
-					this.props.getToDoList();
+					if (response.status === 200) {
+						alert('Task updated successfully:)');
+						this.props.navigateToToDoList();
+						this.props.getToDoList();
+					}
                 })
                 .catch((error) => {
                     this.setState({
@@ -96,9 +97,10 @@ export default class TaskManagerComponent extends Component {
                 }
             }).then(res => res.json())
                 .then((response) => {
-					console.log('Success:', JSON.stringify(response));
-					this.props.navigateToToDoList();
-					this.props.getToDoList();
+					if (response) {
+						this.props.navigateToToDoList();
+						this.props.getToDoList();
+					}
 				})
                 .catch((error) => {
 					this.setState({

@@ -14,9 +14,6 @@ export default class HomeComponent extends Component {
 		this.state = {
             todos: [],
 			task: {},
-            title: '',
-			description: '',
-			date: undefined,
 			showTodos: true,
 			showTaskManager: false,
 			authorization: '',
@@ -36,10 +33,7 @@ export default class HomeComponent extends Component {
 		})
         .then((data) => {
             this.setState({
-                todos: data,
-                title: data.title,
-                description: data.description,
-                date: data.date
+                todos: data
             });
         })
         .catch((error) =>{
@@ -64,10 +58,7 @@ export default class HomeComponent extends Component {
 			this.setState({
 				showTodos: false,
 				showTaskManager: false,
-				task: data,
-				title: data.title,
-				description: data.description,
-				date: data.date
+				task: data
 			});
 		})
 		.catch((error) => {
@@ -106,7 +97,9 @@ export default class HomeComponent extends Component {
 		method: 'DELETE'
 		})
 		.then((response) => {
-			this.getToDos();
+			if (response.status === 200) {
+				this.getToDos();
+			}
 		})
 		.catch((error) => {
 			this.setState({
