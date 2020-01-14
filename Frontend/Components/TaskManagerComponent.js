@@ -81,8 +81,6 @@ export default class TaskManagerComponent extends Component {
 
 
     postTask = () => {
-       //http://localhost:3000/todos
-	   //http://10.80.103.210:3000/todos
         if (
             this.state.title !== '' && this.state.description !== ''
         ) {

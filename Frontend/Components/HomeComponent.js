@@ -106,7 +106,6 @@ export default class HomeComponent extends Component {
 		method: 'DELETE'
 		})
 		.then((response) => {
-			console.log('Task removed successfully ', response);
 			this.getToDos();
 		})
 		.catch((error) => {
