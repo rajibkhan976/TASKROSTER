@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import HomeComponent from '../Components/HomeComponent.js
+import HomeComponent from '../Components/HomeComponent';
 
 //Simple screen for the home page, containing the Home Component
 export default class HomeScreen extends Component {
