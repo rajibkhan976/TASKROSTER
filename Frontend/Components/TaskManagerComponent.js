@@ -151,7 +151,7 @@ export default class TaskManagerComponent extends Component {
 				<View>
 					<Icon iconStyle={styles.iconArrowLeft} name="arrow-left" type="font-awesome" onPress={() => this.props.navigateToToDoList()}/>
 				</View>
-                <Text style={styles.message}>Add your task!</Text>
+                <Text style={styles.message}>{this.props.task ? 'Update task!' : 'Add your task!'}</Text>
                 <TextInput placeholder='Title'
                     style={styles.form}
                     value={title}
