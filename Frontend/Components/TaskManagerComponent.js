@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { Platform, Text, View, Button, TextInput } from 'react-native';
 import styles from '../Style';
 import { Icon } from 'react-native-elements';
-import { Ionicons } from '@expo/vector-icons';
 //import DateTimePicker from '@react-native-community/datetimepicker';
 
 //This component is responsible for adding and updating tasks
@@ -151,7 +150,7 @@ export default class TaskManagerComponent extends Component {
         return (
             <View style={styles.container}>
 				<View>
-                    <Ionicons iconstyle={styles.iconArrowLeft} name="md-arrow-back" size={32} onPress={() => this.props.navigateToToDoList()}/>
+                    <Icon iconStyle={styles.iconArrowLeft} name="arrow-left" type="font-awesome" onPress={() => this.props.navigateToToDoList()}/>
 				</View>
                 <Text style={styles.message}>{this.props.task ? 'Update task!' : 'Add your task!'}</Text>
                 <TextInput placeholder='Title'
@@ -166,7 +165,7 @@ export default class TaskManagerComponent extends Component {
                     style={styles.form}
                     value={this.state.date}
                     onChangeText={(date) => this.setState({date})} /> 
-                 <View>
+                 <View style={{ marginTop: 20 }}>
 					<Button onPress={this.datepicker} title="Add date" />
 				</View>
 				<View>

@@ -132,10 +132,10 @@ export default class HomeComponent extends Component {
                         <Text style={styles.title}>{item.title}</Text>{"\n"}
                         <Text>{item.description}</Text>{"\n"} 
                         <Text>{moment(item.date).format('YYYY-MM-DD, hh:mm a')}</Text>
-                        <Text style={styles.iconView}>
-							<Ionicons name="ios-create" size={30} onPress={(e) => this.getTaskById(item._id, e)}/>
-							<Ionicons name="ios-trash" size={30} onPress={(e) => this.authorizeTaskRemove(item._id, e)} />
-						</Text>
+                        <View style={styles.iconView}>
+                            <Icon iconStyle={styles.iconEdit} name="edit" type="font-awesome" onPress={(e) => this.getTaskById(item._id, e)}/>
+                            <Icon iconStyle={styles.iconDelete} name="trash" type="font-awesome" onPress={(e) => this.authorizeTaskRemove(item._id, e)}/> 
+                        </View>
 						{this.state.showAuthorizeMessgae.includes(item._id) ?
 							<View style={styles.iconRemoveMessage}>
 								<Text>{this.state.authorization}</Text>
