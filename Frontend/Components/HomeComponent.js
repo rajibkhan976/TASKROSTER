@@ -106,10 +106,6 @@ export default class HomeComponent extends Component {
 		method: 'DELETE'
 		})
 		.then((response) => {
-			response.json();
-		})
-		.then((response) => {
-			console.log('Task removed successfully ', JSON.stringify(response));
 			this.getToDos();
 		})
 		.catch((error) => {
