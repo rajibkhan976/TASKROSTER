@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import styles from '../Style';
 import { Icon } from 'react-native-elements';
+import { Ionicons } from '@expo/vector-icons';
 //import DateTimePicker from '@react-native-community/datetimepicker';
 
 //This component is responsible for adding and updating tasks
@@ -45,11 +46,11 @@ export default class TaskManagerComponent extends Component {
             this.state.description !== '' &&
             this.state.date !== ''
         ) {
-            fetch("http://localhost:3000/todos/" + taskId, {
+            fetch("http://10.80.101.40:3000/todos/" + taskId, {
                 method: 'PATCH',
                 mode: 'cors',
                 headers: {
-                    'Access-Control-Allow-Origin': 'http://localhost:3000/',
+                    'Access-Control-Allow-Origin': 'http://10.80.101.40:3000/',
                     'Access-Control-Allow-Credentials': 'true',
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -86,7 +87,7 @@ export default class TaskManagerComponent extends Component {
         if (
             this.state.title !== '' && this.state.description !== ''
         ) {
-            fetch("http://localhost:3000/todos", {
+            fetch("http://10.80.101.40:3000/todos", {
                 method: 'POST',
                 body: JSON.stringify({
                     title: this.state.title,
@@ -150,7 +151,7 @@ export default class TaskManagerComponent extends Component {
         return (
             <View style={styles.container}>
 				<View>
-					<Icon iconStyle={styles.iconArrowLeft} name="arrow-left" type="font-awesome" onPress={() => this.props.navigateToToDoList()}/>
+                    <Ionicons iconstyle={styles.iconArrowLeft} name="md-arrow-back" size={32} onPress={() => this.props.navigateToToDoList()}/>
 				</View>
                 <Text style={styles.message}>{this.props.task ? 'Update task!' : 'Add your task!'}</Text>
                 <TextInput placeholder='Title'

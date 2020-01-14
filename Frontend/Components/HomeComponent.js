@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 import moment from 'moment';
 import { Icon } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
@@ -29,7 +29,7 @@ export default class HomeComponent extends Component {
     }
 	
 	getToDos = () => {
-		fetch('http://localhost:3000/todos')
+		fetch('http://10.80.101.40:3000/todos')
         .then((response) => {
 			return response.json();
 		})
@@ -51,7 +51,7 @@ export default class HomeComponent extends Component {
 	}
     
     getTaskById = (taskId, e) => {
-		fetch("http://localhost:3000/todos/" + taskId)
+		fetch("http://10.80.101.40:3000/todos/" + taskId)
 		.then((response) => {
 			return response.json();
 		})
@@ -94,7 +94,7 @@ export default class HomeComponent extends Component {
 	}
 	
 	removeTaskById = (taskId, e) => {
-		fetch("http://localhost:3000/todos/" + taskId, {
+		fetch("http://10.80.101.40:3000/todos/" + taskId, {
 		method: 'DELETE'
 		})
 		.then((response) => {
@@ -118,13 +118,10 @@ export default class HomeComponent extends Component {
   render() {
 	return (
         <View>
-            <View style={styles.logoView}>
-                <Image style={styles.logo} source={require('./large_taskroster.png')} />
-            </View>
 			{this.state.showTodos ? 
 			<View style={styles.infoContainer}>
                 <Text style={styles.infoText}>Welcome!</Text>
-                <Text style={styles.addButton} onPress={(e) => this.addTask(e)}> Add Task <Ionicons name="md-add-circle-outline" size={20}/></Text>
+                <Text style={styles.addButton} onPress={(e) => this.addTask(e)}> Add Task <Ionicons name="md-add-circle-outline" size={26}/></Text>
                 <FlatList
                     style={styles.flatList}
                     data={this.state.todos}
@@ -135,10 +132,10 @@ export default class HomeComponent extends Component {
                         <Text style={styles.title}>{item.title}</Text>{"\n"}
                         <Text>{item.description}</Text>{"\n"} 
                         <Text>{moment(item.date).format('YYYY-MM-DD, hh:mm a')}</Text>
-                        <View style={styles.iconView}>
-                            <Icon iconStyle={styles.iconEdit} name="edit" type="font-awesome" onPress={(e) => this.getTaskById(item._id, e)}/>
-                            <Icon iconStyle={styles.iconDelete} name="trash" type="font-awesome" onPress={(e) => this.authorizeTaskRemove(item._id, e)}/> 
-                        </View>
+                        <Text style={styles.iconView}>
+							<Ionicons name="ios-create" size={30} onPress={(e) => this.getTaskById(item._id, e)}/>
+							<Ionicons name="ios-trash" size={30} onPress={(e) => this.authorizeTaskRemove(item._id, e)} />
+						</Text>
 						{this.state.showAuthorizeMessgae.includes(item._id) ?
 							<View style={styles.iconRemoveMessage}>
 								<Text>{this.state.authorization}</Text>
