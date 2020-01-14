@@ -111,13 +111,13 @@ export default class TaskManagerComponent extends Component {
 				});
 				this.setState({
                 message: 'Task Added!'
-            });
-        } else {
-            alert('Please enter the information correctly!')
-            this.setState({
-                message: 'Task not Added!'
-            })
-        }
+				});
+				} else {
+					alert('Please enter the information correctly!')
+					this.setState({
+						message: 'Task not Added!'
+					})
+				}
     }
 
     setDate = (event, date) => {
@@ -145,9 +145,6 @@ export default class TaskManagerComponent extends Component {
     }
 
     render() {
-        console.log(this.state.title)
-        console.log(this.state.description)
-        console.log(this.state.date)
         const { show, date, mode, title, description, message } = this.state;
         return (
             <View style={styles.container}>
@@ -168,11 +165,11 @@ export default class TaskManagerComponent extends Component {
                     value={this.state.date}
                     onChangeText={(date) => this.setState({date})} /> 
                  <View>
-          <Button onPress={this.datepicker} title="Add date" />
-        </View>
-        <View>
-          <Button onPress={this.timepicker} title="Add time!" />
-        </View>
+					<Button onPress={this.datepicker} title="Add date" />
+				</View>
+				<View>
+					<Button onPress={this.timepicker} title="Add time!" />
+				</View>
         {/* show && <DateTimePicker value={date}
 =======
                     value={description}
@@ -191,15 +188,15 @@ export default class TaskManagerComponent extends Component {
                     onChange={this.setDate} />
 <<<<<<< HEAD
         */} 
-		{this.props.task ?
-		<Button title='Update task'
-                    style={styles.button}
-                    onPress={(e) => this.updateTaskById(this.props.task._id, e)} />
-		:
-		<Button title='Add task'
-                    style={styles.button}
-                    onPress={() => this.postTask()} />
-		}
+				{this.props.task ?
+				<Button title='Update task'
+							style={styles.button}
+							onPress={(e) => this.updateTaskById(this.props.task._id, e)} />
+				:
+				<Button title='Add task'
+							style={styles.button}
+							onPress={() => this.postTask()} />
+				}
         </View>
         );
     }
