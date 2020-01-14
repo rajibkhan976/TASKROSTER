@@ -165,7 +165,7 @@ export default class TaskManagerComponent extends Component {
                     style={styles.form}
                     value={this.state.date}
                     onChangeText={(date) => this.setState({date})} /> 
-                 <View>
+                 <View style={{ marginTop: 20 }}>
 					<Button onPress={this.datepicker} title="Add date" />
 				</View>
 				<View>
