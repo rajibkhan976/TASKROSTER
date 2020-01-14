@@ -6,6 +6,8 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from '../Style';
 import TaskManagerScreen from '../Screens/TaskManagerScreen';
 
+//This component is responsible for showing the ToDoList, Removing task, fetching a specific
+//task by id for update and also controls the conditional rendering to ensure navigation
 export default class HomeComponent extends Component {
 	
 	constructor(props) {

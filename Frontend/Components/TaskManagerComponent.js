@@ -5,6 +5,7 @@ import { Icon } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 //import DateTimePicker from '@react-native-community/datetimepicker';
 
+//This component is responsible for adding and updating tasks
 export default class TaskManagerComponent extends Component {
 
     constructor(props) {
