@@ -199,8 +199,3 @@ export default class TaskManagerComponent extends Component {
         );
     }
 }
-
-
-const style = StyleSheet.create({
-
-});
