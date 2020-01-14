@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 import TaskManagerComponent from '../Components/TaskManagerComponent';
-
-
+import styles from '../Style';
 
 export default class TaskManagerScreen extends Component {
   render() {
@@ -17,19 +16,3 @@ export default class TaskManagerScreen extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-  padding: 50
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
