@@ -6,6 +6,7 @@ export default StyleSheet.create({
     width: '50%',
     height: 100,
     marginTop: 10,
+    marginTop: 40
   },
   logoView: {
     borderBottomWidth: 1,
@@ -18,64 +19,61 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20,
+    height: '100%'
     //height: '100%'
   },
   infoText: {
     fontSize: 20,
     lineHeight: 25
   },
-  addButton: {
-    fontSize: 20,
-    marginTop: 20
-  },
   flatList: {
     marginTop: 10,
-    width: '100%',
-    height: '80%',
+    width: '100%'
   },
   eachTask: {
-    height: 120,
     margin: 10,
     padding: 20,
-    //shadowColor: "#000",
-    //shadowOffset: {
-      //width: 0,
-      //height: 2,
-    //},
-    //shadowOpacity: 0.22,
-    //shadowRadius: 6.22,
-    //elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 6.22,
+    elevation: 3,
   },
   iconView: {
-    //position: "absolute",
-    //top: 20,
-    //right: 20,
+    position: "absolute",
+    top: "20px",
+    right: "20px",
+    display: "block"
   },
   iconDelete: {
-    marginLeft: 10,
+    marginLeft: "10px",
+    fontSize: "20px"
   },
   iconEdit: {
-    //fontSize: "20px"
+    fontSize: "20px"
   },
   iconRemoveMessage: {
 	  margin: 15
   },
   iconCheck: {
 	  position: "absolute",
-	  top: 5,
-	  left: 100,
-	  //fontSize: "20px"
+	  top: "5px",
+	  left: "100px",
+	  fontSize: "20px"
   },
   iconTimes: {
 	  position: "absolute",
-	  top: 5,
-	  left: 160,
-	  //fontSize: "20px"
+	  top: "5px",
+	  left: "160px",
+	  fontSize: "20px"
   },
   iconArrowLeft: {
-	  //position: "absolute",
-	  //top: "-50px",
-	  //left: "-60px",
+	  position: "absolute",
+	  top: "-50px",
+	  left: "-60px",
   },
   
   //TaskManager
@@ -84,7 +82,7 @@ export default StyleSheet.create({
     textAlign: 'center'
   },
   container: {
-      //padding: 50
+      padding: 20,
       width: '100%'
   },
   form: {
