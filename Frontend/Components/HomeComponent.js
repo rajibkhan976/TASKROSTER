@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList, Button, Image } from 'react-native';
 import moment from 'moment';
 import { Icon } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
@@ -29,7 +29,8 @@ export default class HomeComponent extends Component {
     }
 	
 	getToDos = () => {
-		fetch('http://10.80.101.40:3000/todos')
+		//http://10.80.101.40:3000/todos
+		fetch('http://localhost:3000/todos')
         .then((response) => {
 			return response.json();
 		})
@@ -51,7 +52,8 @@ export default class HomeComponent extends Component {
 	}
     
     getTaskById = (taskId, e) => {
-		fetch("http://10.80.101.40:3000/todos/" + taskId)
+		//http://10.80.101.40:3000/todos/
+		fetch("http://localhost:3000/todos/" + taskId)
 		.then((response) => {
 			return response.json();
 		})
@@ -94,7 +96,8 @@ export default class HomeComponent extends Component {
 	}
 	
 	removeTaskById = (taskId, e) => {
-		fetch("http://10.80.101.40:3000/todos/" + taskId, {
+		//http://10.80.101.40:3000/todos/
+		fetch("http://localhost:3000/todos/" + taskId, {
 		method: 'DELETE'
 		})
 		.then((response) => {
@@ -133,15 +136,43 @@ export default class HomeComponent extends Component {
                         <Text>{item.description}</Text>{"\n"} 
                         <Text>{moment(item.date).format('YYYY-MM-DD, hh:mm a')}</Text>
                         <View style={styles.iconView}>
-                            <Icon iconStyle={styles.iconEdit} name="edit" type="font-awesome" onPress={(e) => this.getTaskById(item._id, e)}/>
-                            <Icon iconStyle={styles.iconDelete} name="trash" type="font-awesome" onPress={(e) => this.authorizeTaskRemove(item._id, e)}/> 
+						<Text onPress={(e) => this.getTaskById(item._id, e)}>
+							<Image 
+							style={styles.iconEdit}
+							source={require('../Images/edit.png')} 
+							/>
+						</Text>
+						<Text onPress={(e) => this.authorizeTaskRemove(item._id, e)}>
+							<Image 
+							style={styles.iconDelete}
+							source={require('../Images/delete.png')} 
+							/>
+						</Text>
+								{/*
+								<Icon iconStyle={styles.iconEdit} name="edit" type="font-awesome" onPress={(e) => this.getTaskById(item._id, e)}/>
+								<Icon iconStyle={styles.iconDelete} name="trash" type="font-awesome" onPress={(e) => this.authorizeTaskRemove(item._id, e)}/> 
+								*/}
                         </View>
 						{this.state.showAuthorizeMessgae.includes(item._id) ?
 							<View style={styles.iconRemoveMessage}>
 								<Text>{this.state.authorization}</Text>
 								<View>
+								<Text onPress={(e) => this.removeTaskById(this.state.taskId, e)}>
+									<Image 
+									style={styles.iconCheck}
+									source={require('../Images/check.png')} 
+									/>
+								</Text>
+								<Text onPress={(e) => this.abortRemoveAction(e)}>
+									<Image 
+									style={styles.iconClose}
+									source={require('../Images/close.png')} 
+									/>
+								</Text>
+								{/*
 									<Icon iconStyle={styles.iconCheck} name="check" type="font-awesome" onPress={(e) => this.removeTaskById(this.state.taskId, e)}/> 
 									<Icon iconStyle={styles.iconTimes} name="times" type="font-awesome" onPress={(e) => this.abortRemoveAction(e)}/>
+								*/}
 								</View>
 							</View>
 							:

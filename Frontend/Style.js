@@ -49,11 +49,15 @@ export default StyleSheet.create({
     display: "block"
   },
   iconDelete: {
-    marginLeft: "10px",
-    fontSize: "20px"
+    marginLeft: 10,
+	width: 20, 
+	height: 20
+    //fontSize: "20px"
   },
   iconEdit: {
-    fontSize: "20px"
+    //fontSize: "20px",
+	width: 20, 
+	height: 20
   },
   iconRemoveMessage: {
 	  margin: 15
@@ -62,18 +66,24 @@ export default StyleSheet.create({
 	  position: "absolute",
 	  top: "5px",
 	  left: "100px",
-	  fontSize: "20px"
+	  width: 20, 
+	  height: 20
+	  //fontSize: "20px"
   },
-  iconTimes: {
+  iconClose: {
 	  position: "absolute",
 	  top: "5px",
 	  left: "160px",
-	  fontSize: "20px"
+	  width: 20, 
+	  height: 20
+	  //fontSize: "20px"
   },
   iconArrowLeft: {
-	  position: "absolute",
-	  top: "-50px",
-	  left: "-60px",
+	  //position: "absolute",
+	  //top: "-50px",
+	  //left: "-60px",
+	  width: 20, 
+	  height: 20
   },
   
   //TaskManager
