@@ -8,7 +8,7 @@ export default class App extends Component {
     return (
       <View>
         <View style={styles.logoView}>
-          <Image style={styles.logo} source={require('./Components/large_taskroster.png')} />
+          <Image style={styles.logo} source={require('./Images/large_taskroster.png')} />
         </View>
         <HomeScreen/>
       </View>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, Text, View, Button, TextInput } from 'react-native';
+import { Platform, Text, View, Button, TextInput, Image } from 'react-native';
 import styles from '../Style';
 import { Icon } from 'react-native-elements';
 //import DateTimePicker from '@react-native-community/datetimepicker';
@@ -45,7 +45,8 @@ export default class TaskManagerComponent extends Component {
             this.state.description !== '' &&
             this.state.date !== ''
         ) {
-            fetch("http://10.80.101.40:3000/todos/" + taskId, {
+			//http://10.80.101.40:3000/todos/
+            fetch("http://localhost:3000/todos/" + taskId, {
                 method: 'PATCH',
                 mode: 'cors',
                 headers: {
@@ -86,7 +87,8 @@ export default class TaskManagerComponent extends Component {
         if (
             this.state.title !== '' && this.state.description !== ''
         ) {
-            fetch("http://10.80.101.40:3000/todos", {
+			//http://10.80.101.40:3000/todos
+            fetch("http://localhost:3000/todos", {
                 method: 'POST',
                 body: JSON.stringify({
                     title: this.state.title,
@@ -150,7 +152,15 @@ export default class TaskManagerComponent extends Component {
         return (
             <View style={styles.container}>
 				<View>
-                    <Icon iconStyle={styles.iconArrowLeft} name="arrow-left" type="font-awesome" onPress={() => this.props.navigateToToDoList()}/>
+				<Text onPress={(e) => this.props.navigateToToDoList()}>
+					<Image 
+					style={styles.iconArrowLeft}
+					source={require('../Images/left-arrow.png')} 
+					/>
+				</Text>
+				{/*
+					<Icon iconStyle={styles.iconArrowLeft} name="arrow-left" type="font-awesome" onPress={() => this.props.navigateToToDoList()}/>
+				*/}
 				</View>
                 <Text style={styles.message}>{this.props.task ? 'Update task!' : 'Add your task!'}</Text>
                 <TextInput placeholder='Title'
