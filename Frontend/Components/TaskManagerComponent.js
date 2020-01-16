@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Platform, Text, View, Button, TextInput, Image } from 'react-native';
 import styles from '../Style';
-import { Icon } from 'react-native-elements';
-//import DateTimePicker from '@react-native-community/datetimepicker';
+import { Ionicons } from '@expo/vector-icons';
+//import DateTimePicker from '@react-native-community/datetimepicker';  *** COMMENTED OUT, ONLY WORKS ON MOBILE DEVICES
 
 //This component is responsible for adding and updating tasks
 export default class TaskManagerComponent extends Component {
@@ -45,12 +45,11 @@ export default class TaskManagerComponent extends Component {
             this.state.description !== '' &&
             this.state.date !== ''
         ) {
-			//http://10.80.101.40:3000/todos/
             fetch("http://localhost:3000/todos/" + taskId, {
                 method: 'PATCH',
                 mode: 'cors',
                 headers: {
-                    'Access-Control-Allow-Origin': 'http://10.80.101.40:3000/',
+                    'Access-Control-Allow-Origin': 'http://localhost:3000/',
                     'Access-Control-Allow-Credentials': 'true',
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -87,7 +86,6 @@ export default class TaskManagerComponent extends Component {
         if (
             this.state.title !== '' && this.state.description !== ''
         ) {
-			//http://10.80.101.40:3000/todos
             fetch("http://localhost:3000/todos", {
                 method: 'POST',
                 body: JSON.stringify({
@@ -151,17 +149,9 @@ export default class TaskManagerComponent extends Component {
         const { show, date, mode, title, description, message } = this.state;
         return (
             <View style={styles.container}>
-				<View>
-				<Text onPress={(e) => this.props.navigateToToDoList()}>
-					<Image 
-					style={styles.iconArrowLeft}
-					source={require('../Images/left-arrow.png')} 
-					/>
-				</Text>
-				{/*
-					<Icon iconStyle={styles.iconArrowLeft} name="arrow-left" type="font-awesome" onPress={() => this.props.navigateToToDoList()}/>
-				*/}
-				</View>
+				        <View>
+                    <Ionicons style={styles.iconArrowLeft} name="md-arrow-back" size={28} onPress={() => this.props.navigateToToDoList()}/>
+				        </View>
                 <Text style={styles.message}>{this.props.task ? 'Update task!' : 'Add your task!'}</Text>
                 <TextInput placeholder='Title'
                     style={styles.form}
@@ -175,39 +165,43 @@ export default class TaskManagerComponent extends Component {
                     style={styles.form}
                     value={this.state.date}
                     onChangeText={(date) => this.setState({date})} /> 
-                 <View style={{ marginTop: 20 }}>
+                {/* 
+
+                COMMENTED THIS OUT CAUSE IT'S RELATED TO THE TIME PICKER,
+                ONLY WORKS ON MOBILE DEVICES
+
+                <View style={{ marginTop: 20 }}>
 					<Button onPress={this.datepicker} title="Add date" />
 				</View>
 				<View>
 					<Button onPress={this.timepicker} title="Add time!" />
-				</View>
-        {/* show && <DateTimePicker value={date}
-=======
-                    value={description}
-                    onChangeText={(description) => this.setState({ description })} />
-                <View>
-                    <Button onPress={this.datepicker} title="Add date" />
                 </View>
-                <View>
-                    <Button onPress={this.timepicker} title="Add time!" />
-                </View>
+                */}
+                {/*
+
+                COMMENTED THIS OUT CAUSE IT ONLY WORKS ON MOBILE DEVICES,
+                NOT FOR THE WEB BROWSER
+
                 {show && <DateTimePicker value={date}
->>>>>>> 547f11db1bb9e5bd3e0e2c8cd4d11e59fcd6a8f3
                     mode={mode}
                     is24Hour={true}
                     display="default"
                     onChange={this.setDate} />
-<<<<<<< HEAD
-        */} 
-				{this.props.task ?
-				<Button title='Update task'
-							style={styles.button}
-							onPress={(e) => this.updateTaskById(this.props.task._id, e)} />
-				:
-				<Button title='Add task'
-							style={styles.button}
-							onPress={() => this.postTask()} />
-				}
+                }
+                */}
+                <View style={{ marginTop: 30}}>
+                    {this.props.task ?
+                    <Button title='Update task'
+                        color='#3f8432'
+                        style={styles.button}
+                        onPress={(e) => this.updateTaskById(this.props.task._id, e)} />
+                    :
+                    <Button title='Add task'
+                        color='#3f8432'
+                        style={styles.button}
+                        onPress={() => this.postTask()} />
+                    }
+                </View>
         </View>
         );
     }

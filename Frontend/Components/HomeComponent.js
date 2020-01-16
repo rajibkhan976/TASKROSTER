@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, Button, Image } from 'react-native';
 import moment from 'moment';
-import { Icon } from 'react-native-elements';
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../Style';
 import TaskManagerScreen from '../Screens/TaskManagerScreen';
@@ -29,7 +28,6 @@ export default class HomeComponent extends Component {
     }
 	
 	getToDos = () => {
-		//http://10.80.101.40:3000/todos
 		fetch('http://localhost:3000/todos')
         .then((response) => {
 			return response.json();
@@ -52,7 +50,6 @@ export default class HomeComponent extends Component {
 	}
     
     getTaskById = (taskId, e) => {
-		//http://10.80.101.40:3000/todos/
 		fetch("http://localhost:3000/todos/" + taskId)
 		.then((response) => {
 			return response.json();
@@ -96,7 +93,6 @@ export default class HomeComponent extends Component {
 	}
 	
 	removeTaskById = (taskId, e) => {
-		//http://10.80.101.40:3000/todos/
 		fetch("http://localhost:3000/todos/" + taskId, {
 		method: 'DELETE'
 		})
@@ -124,7 +120,7 @@ export default class HomeComponent extends Component {
 			{this.state.showTodos ? 
 			<View style={styles.infoContainer}>
                 <Text style={styles.infoText}>Welcome!</Text>
-                <Text style={styles.addButton} onPress={(e) => this.addTask(e)}> Add Task <Ionicons name="md-add-circle-outline" size={26}/></Text>
+                <Text style={styles.addButton} onPress={(e) => this.addTask(e)}> Add Task <Ionicons name="md-add-circle-outline" size={22}/></Text>
                 <FlatList
                     style={styles.flatList}
                     data={this.state.todos}
@@ -134,45 +130,17 @@ export default class HomeComponent extends Component {
                     <Text style={styles.eachTask}>
                         <Text style={styles.title}>{item.title}</Text>{"\n"}
                         <Text>{item.description}</Text>{"\n"} 
-                        <Text>{moment(item.date).format('YYYY-MM-DD, hh:mm a')}</Text>
+                        <Text style={styles.date}>Deadline: {moment(item.date).format('YYYY-MM-DD, hh:mm a')}</Text>
                         <View style={styles.iconView}>
-						<Text onPress={(e) => this.getTaskById(item._id, e)}>
-							<Image 
-							style={styles.iconEdit}
-							source={require('../Images/edit.png')} 
-							/>
-						</Text>
-						<Text onPress={(e) => this.authorizeTaskRemove(item._id, e)}>
-							<Image 
-							style={styles.iconDelete}
-							source={require('../Images/delete.png')} 
-							/>
-						</Text>
-								{/*
-								<Icon iconStyle={styles.iconEdit} name="edit" type="font-awesome" onPress={(e) => this.getTaskById(item._id, e)}/>
-								<Icon iconStyle={styles.iconDelete} name="trash" type="font-awesome" onPress={(e) => this.authorizeTaskRemove(item._id, e)}/> 
-								*/}
+							              <Ionicons name="md-create" size={24} onPress={(e) => this.getTaskById(item._id, e)}/>
+                            <Ionicons name="md-trash" size={24} onPress={(e) => this.authorizeTaskRemove(item._id, e)}/> 
                         </View>
 						{this.state.showAuthorizeMessgae.includes(item._id) ?
 							<View style={styles.iconRemoveMessage}>
 								<Text>{this.state.authorization}</Text>
 								<View>
-								<Text onPress={(e) => this.removeTaskById(this.state.taskId, e)}>
-									<Image 
-									style={styles.iconCheck}
-									source={require('../Images/check.png')} 
-									/>
-								</Text>
-								<Text onPress={(e) => this.abortRemoveAction(e)}>
-									<Image 
-									style={styles.iconClose}
-									source={require('../Images/close.png')} 
-									/>
-								</Text>
-								{/*
-									<Icon iconStyle={styles.iconCheck} name="check" type="font-awesome" onPress={(e) => this.removeTaskById(this.state.taskId, e)}/> 
-									<Icon iconStyle={styles.iconTimes} name="times" type="font-awesome" onPress={(e) => this.abortRemoveAction(e)}/>
-								*/}
+									<Ionicons style={styles.iconCheck} name="md-checkmark" size={24} onPress={(e) => this.removeTaskById(this.state.taskId, e)}/> 
+									<Ionicons style={styles.iconTimes} name="md-close" size={24} onPress={(e) => this.abortRemoveAction(e)}/>
 								</View>
 							</View>
 							:
@@ -183,18 +151,18 @@ export default class HomeComponent extends Component {
             </View>
 			:
 			<View>
-			{this.state.showTaskManager ? 
-			<TaskManagerScreen 
-			navigateToToDoList={this.navigateToToDoList}
-			getToDoList={this.getToDos}
-			/>
-			:
-			<TaskManagerScreen 
-			task={this.state.task} 
-			navigateToToDoList={this.navigateToToDoList}
-			getToDoList={this.getToDos}
-			/>
-			}
+				{this.state.showTaskManager ? 
+				<TaskManagerScreen 
+				navigateToToDoList={this.navigateToToDoList}
+				getToDoList={this.getToDos}
+				/>
+				:
+				<TaskManagerScreen 
+				task={this.state.task} 
+				navigateToToDoList={this.navigateToToDoList}
+				getToDoList={this.getToDos}
+				/>
+				}
 			</View>
 			}
 	    </View>
