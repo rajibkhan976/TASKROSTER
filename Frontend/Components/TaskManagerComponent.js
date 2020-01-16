@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, Text, View, Button, TextInput } from 'react-native';
+import { Platform, Text, View, Button, TextInput, Image } from 'react-native';
 import styles from '../Style';
 import { Ionicons } from '@expo/vector-icons';
 //import DateTimePicker from '@react-native-community/datetimepicker';  *** COMMENTED OUT, ONLY WORKS ON MOBILE DEVICES
@@ -149,9 +149,9 @@ export default class TaskManagerComponent extends Component {
         const { show, date, mode, title, description, message } = this.state;
         return (
             <View style={styles.container}>
-				<View>
+				        <View>
                     <Ionicons style={styles.iconArrowLeft} name="md-arrow-back" size={28} onPress={() => this.props.navigateToToDoList()}/>
-				</View>
+				        </View>
                 <Text style={styles.message}>{this.props.task ? 'Update task!' : 'Add your task!'}</Text>
                 <TextInput placeholder='Title'
                     style={styles.form}

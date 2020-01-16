@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, FlatList } from 'react-native';
+import { Text, View, FlatList, Button, Image } from 'react-native';
 import moment from 'moment';
 import { Ionicons } from '@expo/vector-icons';
 import styles from '../Style';
@@ -132,7 +132,7 @@ export default class HomeComponent extends Component {
                         <Text>{item.description}</Text>{"\n"} 
                         <Text style={styles.date}>Deadline: {moment(item.date).format('YYYY-MM-DD, hh:mm a')}</Text>
                         <View style={styles.iconView}>
-							<Ionicons name="md-create" size={24} onPress={(e) => this.getTaskById(item._id, e)}/>
+							              <Ionicons name="md-create" size={24} onPress={(e) => this.getTaskById(item._id, e)}/>
                             <Ionicons name="md-trash" size={24} onPress={(e) => this.authorizeTaskRemove(item._id, e)}/> 
                         </View>
 						{this.state.showAuthorizeMessgae.includes(item._id) ?
