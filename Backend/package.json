@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "mongoose": "^5.5.11",
     "node-dotify": "^1.0.1",
     "nodemon": "^1.19.0"
